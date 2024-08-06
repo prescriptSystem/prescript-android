@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Prescript" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="toolbarStyle">@style/ToolBarStyle</item>
+    </style>
+
+    <style name="Theme.Prescript" parent="Base.Theme.Prescript" />
+
+    <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/ToolBarStyle.Title</item>
+    </style>
+
+    <style name="ToolBarStyle.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+</resources>

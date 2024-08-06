@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/loginFormFragment">
+
+    <fragment
+        android:id="@+id/medicineFragment"
+        android:name="br.pucpr.appdev.prescript.ui.medicine.MedicineFragment"
+        android:label="@string/cadastro_de_medicamentos"
+        tools:layout="@layout/fragment_medicine" >
+        <argument
+            android:name="medicine"
+            app:argType="br.pucpr.appdev.prescript.data.db.entity.MedicineEntity"
+            android:defaultValue="@null"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicineListFragment"
+        android:name="br.pucpr.appdev.prescript.ui.medicinelist.MedicineListFragment"
+        android:label="@string/lista_de_medicamentos"
+        tools:layout="@layout/fragment_medicine_list" >
+        <action
+            android:id="@+id/action_medicineListFragment_to_medicineFragment"
+            app:destination="@id/medicineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFormFragment"
+        android:name="br.pucpr.appdev.prescript.ui.login.LoginFormFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login_form" >
+        <action
+            android:id="@+id/action_loginFormFragment_to_userFormFragment"
+            app:destination="@id/userFormFragment" />
+        <action
+            android:id="@+id/action_loginFormFragment_to_medicineListFragment"
+            app:destination="@id/medicineListFragment" />
+        <action
+            android:id="@+id/action_loginFormFragment_to_esqueceuSenhaFragment"
+            app:destination="@id/esqueceuSenhaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFormFragment"
+        android:name="br.pucpr.appdev.prescript.ui.login.UserFormFragment"
+        android:label="Cadastro de Usuário"
+        tools:layout="@layout/fragment_user_form" />
+    <fragment
+        android:id="@+id/esqueceuSenhaFragment"
+        android:name="br.pucpr.appdev.prescript.ui.login.EsqueceuSenhaFragment"
+        android:label="Recuperar senha"
+        tools:layout="@layout/fragment_esqueceu_senha" />
+</navigation>
