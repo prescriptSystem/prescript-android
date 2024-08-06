@@ -76,7 +76,7 @@ class LoginFormFragment : Fragment(R.layout.fragment_login_form) {
                 }
                 else
                 {
-                    Snackbar.make(view, "Não foi possível realizar o login!!", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(view, "Não foi possível realizar o login!", Snackbar.LENGTH_SHORT).show()
                     binding.emailEditText.setText("")
                     binding.passwordEditText.setText("")
                 }
