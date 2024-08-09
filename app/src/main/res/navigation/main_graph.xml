@@ -34,11 +34,11 @@
             android:id="@+id/action_loginFormFragment_to_userFormFragment"
             app:destination="@id/userFormFragment" />
         <action
-            android:id="@+id/action_loginFormFragment_to_medicineListFragment"
-            app:destination="@id/medicineListFragment" />
-        <action
             android:id="@+id/action_loginFormFragment_to_esqueceuSenhaFragment"
             app:destination="@id/esqueceuSenhaFragment" />
+        <action
+            android:id="@+id/action_loginFormFragment_to_medicineListFragment"
+            app:destination="@id/medicineListFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFormFragment"
