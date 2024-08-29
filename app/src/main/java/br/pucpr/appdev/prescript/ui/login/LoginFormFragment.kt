@@ -72,7 +72,7 @@ class LoginFormFragment : Fragment(R.layout.fragment_login_form) {
                     binding.emailEditText.setText("")
                     binding.passwordEditText.setText("")
 
-                    findNavController().navigateWithAnimations(R.id.action_loginFormFragment_to_medicineListFragment)
+                    findNavController().navigateWithAnimations(R.id.action_loginFormFragment_to_home2)
                 }
                 else
                 {

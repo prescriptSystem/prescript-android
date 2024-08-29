@@ -1,25 +1,18 @@
 package br.pucpr.appdev.prescript.ui.medicinelist
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import br.pucpr.appdev.prescript.R
-import br.pucpr.appdev.prescript.data.db.entity.MedicineEntity
-import br.pucpr.appdev.prescript.databinding.FragmentMedicineListBinding
 import br.pucpr.appdev.prescript.databinding.MedicineItemBinding
+import br.pucpr.appdev.prescript.model.Medicine
 
 class MedicineListAdapter(
-    private val medicines: List<MedicineEntity>
+    private val medicines: List<Medicine>
 ) : RecyclerView.Adapter<MedicineListAdapter.MedicineListViewHolder>() {
 
 
-    var onItemClick: ((entity: MedicineEntity) -> Unit )? = null
+    var onItemClick: ((entity: Medicine) -> Unit )? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineListViewHolder {
         val view = LayoutInflater.from(parent.context)/*.inflate(R.layout.medicine_item, parent, false)*/
@@ -46,16 +39,16 @@ class MedicineListAdapter(
         private val textViewMedicineActivePrinciple: TextView = itemView.tvActivePrincipleValue
         private val textViewMedicineQuantity: TextView = itemView.tvQuantityValue
 
-        fun bindView(medicine: MedicineEntity)
+        fun bindView(medicine: Medicine)
         {
 
 
 
             /*textViewMedicineImage.setImageURI(Uri.parse(medicine.imageMedicine))*/
-            textViewMedicineName.text = medicine.nameMedicine
-            textViewMedicineLabName.text = medicine.labName
-            textViewMedicineActivePrinciple.text = medicine.activePrinciple
-            textViewMedicineQuantity.text = medicine.quantity
+            textViewMedicineName.text = medicine.nameMedicine.toString()
+            textViewMedicineLabName.text = medicine.labName.toString()
+            textViewMedicineActivePrinciple.text = medicine.activePrinciple.toString()
+            textViewMedicineQuantity.text = medicine.quantity.toString()
 
             itemView.setOnClickListener{
 

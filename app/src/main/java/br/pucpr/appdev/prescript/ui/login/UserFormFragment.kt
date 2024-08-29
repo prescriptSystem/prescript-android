@@ -54,9 +54,9 @@ class UserFormFragment : Fragment(R.layout.fragment_user_form) {
         val email = binding.inputEmailUser.text.toString()
         val senha = binding.inputPasswordUser.text.toString()
 
-        if(email.isEmpty() || senha.isEmpty())
+        if(validateEmail(email) || senha.isEmpty())
         {
-            Snackbar.make(view, "Preencha todos os campos vazios!", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, "Preencha todos os campos vazios! Ou verifique se o e-mail é válido!", Snackbar.LENGTH_SHORT).show()
         }
         else
         {
@@ -67,6 +67,19 @@ class UserFormFragment : Fragment(R.layout.fragment_user_form) {
                     Snackbar.make(view, "Sucesso ao cadastrar o usuário!", Snackbar.LENGTH_SHORT).show()
                     binding.inputEmailUser.setText("")
                     binding.inputPasswordUser.setText("")
+                }
+                else
+                {
+                    if(cadastro.exception.toString().contains("The email address is already in use by another account"))
+                    {
+                        Snackbar.make(view,"Já existem um usuário com o mesmo e-mail!", Snackbar.LENGTH_SHORT).show()
+                    }
+                    else
+                    {
+                        Snackbar.make(view,"Falha ao cadastrar um usuário!", Snackbar.LENGTH_SHORT).show()
+
+                    }
+
                 }
 
             }
@@ -79,6 +92,21 @@ class UserFormFragment : Fragment(R.layout.fragment_user_form) {
         val parentActivity = requireActivity()
         if(parentActivity is AppCompatActivity) {
             parentActivity.hideKeyboard()
+        }
+    }
+
+    private fun validateEmail(edEmailL: String): Boolean {
+        val emailPattern = Regex("[a-zA-Z\\d._-]+@[a-zA-Z]+\\.+[a-zA-Z]+")
+        return when {
+            edEmailL.trim().isEmpty() -> {
+                true
+            }
+            !edEmailL.trim().matches(emailPattern) -> {
+                true
+            }
+            else -> {
+                false
+            }
         }
     }
 

@@ -36,6 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -43,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username_email"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapCharacters" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

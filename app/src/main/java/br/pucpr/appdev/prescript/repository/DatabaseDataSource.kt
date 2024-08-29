@@ -8,14 +8,12 @@ class DatabaseDataSource(
     private val medicineDao: MedicineDao
 ): MedicineRepository {
     override suspend fun insertMedicine(
-       /*imageMedicine: String,*/
         nameMedicine: String,
         labName: String,
         activePrinciple: String,
         quantity: String
     ): Long {
         val medicine = MedicineEntity(
-           /* imageMedicine = imageMedicine,*/
             nameMedicine = nameMedicine,
             labName = labName,
             activePrinciple = activePrinciple,

@@ -35,4 +35,5 @@
     <string name="sign_up">Cadastrar</string>
     <string name="prescript">PRESCRIPT</string>
     <string name="enviar">Enviar</string>
+    <string name="cadastro_de_exames">Cadastro de Exames</string>
 </resources>

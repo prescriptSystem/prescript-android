@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/item1"
+            android:icon="@drawable/ic_medicine"
+            android:title="@string/cadastro_de_medicamentos"
+            android:checked="true" />
+        <item
+            android:id="@+id/item2"
+            android:icon="@drawable/ic_exam"
+            android:title="@string/cadastro_de_exames" />
+    </group>
+
+</menu>

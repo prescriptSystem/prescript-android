@@ -2,9 +2,11 @@ package br.pucpr.appdev.prescript.ui.medicine
 
 
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +27,8 @@ import br.pucpr.appdev.prescript.extension.hideKeyboard
 import br.pucpr.appdev.prescript.repository.DatabaseDataSource
 import br.pucpr.appdev.prescript.repository.MedicineRepository
 import com.google.android.material.snackbar.Snackbar
-
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 
 
 class MedicineFragment : Fragment(R.layout.fragment_medicine) {
@@ -138,7 +141,27 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
             val activePrinciple = binding.inputActivePrinciple.text.toString()
             val quantity = binding.inputQuantity.text.toString()
 
-            viewModel.addOrUpdateMedicine(/*imageMedicine,*/ nameMedicine, nameLab, activePrinciple, quantity, args.medicine?.id ?: 0)
+            val db = Firebase.firestore
+
+            // Create a new user with a first and last name
+            val medicamentos = hashMapOf(
+                "nameMedicine" to nameMedicine,
+                "nameLab" to nameLab,
+                "activePrinciple" to activePrinciple,
+                "quantity" to quantity
+            )
+
+            // Add a new document with a generated ID
+            db.collection("medicamentos")
+                .add(medicamentos)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+
+            viewModel.addOrUpdateMedicine( nameMedicine, nameLab, activePrinciple, quantity, args.medicine?.id ?: 0)
         }
 
         binding.buttonDeleteMedicine.setOnClickListener {

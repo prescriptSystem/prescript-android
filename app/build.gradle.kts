@@ -59,6 +59,10 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.annotation)
 
+    val material3_version = "1.2.1"
+    implementation("androidx.compose.material3:material3:$material3_version")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+
     val camerax_version = "1.2.2"
     implementation ("androidx.camera:camera-core:${camerax_version}")
     implementation ("androidx.camera:camera-camera2:${camerax_version}")
@@ -76,6 +80,8 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-messaging")
 
     //NAVEGATION COMPONENT
     val nav_version = "2.7.7"

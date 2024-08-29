@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_medicineListFragment_to_medicineFragment"
             app:destination="@id/medicineFragment" />
+        <action
+            android:id="@+id/action_medicineListFragment_to_loginFormFragment"
+            app:destination="@id/loginFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFormFragment"
@@ -37,8 +40,8 @@
             android:id="@+id/action_loginFormFragment_to_esqueceuSenhaFragment"
             app:destination="@id/esqueceuSenhaFragment" />
         <action
-            android:id="@+id/action_loginFormFragment_to_medicineListFragment"
-            app:destination="@id/medicineListFragment" />
+            android:id="@+id/action_loginFormFragment_to_home2"
+            app:destination="@id/home2" />
     </fragment>
     <fragment
         android:id="@+id/userFormFragment"
@@ -50,4 +53,13 @@
         android:name="br.pucpr.appdev.prescript.ui.login.EsqueceuSenhaFragment"
         android:label="Recuperar senha"
         tools:layout="@layout/fragment_esqueceu_senha" />
+    <fragment
+        android:id="@+id/home2"
+        android:name="br.pucpr.appdev.prescript.ui.home.HomeFragment"
+        android:label="Menu"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_medicineListFragment"
+            app:destination="@id/medicineListFragment" />
+    </fragment>
 </navigation>

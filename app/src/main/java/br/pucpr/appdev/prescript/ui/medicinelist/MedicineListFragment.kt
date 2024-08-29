@@ -1,37 +1,29 @@
 package br.pucpr.appdev.prescript.ui.medicinelist
 
-import androidx.fragment.app.viewModels
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.camera.core.ImageCapture
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.navigation.fragment.findNavController
 import br.pucpr.appdev.prescript.R
-import br.pucpr.appdev.prescript.data.db.AppDatabase
-import br.pucpr.appdev.prescript.data.db.dao.MedicineDao
-import br.pucpr.appdev.prescript.data.db.entity.MedicineEntity
-import br.pucpr.appdev.prescript.databinding.FragmentMedicineBinding
 import br.pucpr.appdev.prescript.databinding.FragmentMedicineListBinding
 import br.pucpr.appdev.prescript.extension.navigateWithAnimations
-import br.pucpr.appdev.prescript.repository.DatabaseDataSource
-import br.pucpr.appdev.prescript.repository.MedicineRepository
-import br.pucpr.appdev.prescript.ui.medicine.MedicineViewModel
+import br.pucpr.appdev.prescript.model.Medicine
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import java.util.concurrent.ExecutorService
+import com.google.firebase.firestore.firestore
 
 class MedicineListFragment : Fragment(R.layout.fragment_medicine_list) {
 
     private var _binding: FragmentMedicineListBinding? = null
     private val binding get() = _binding!!
     private val auth = FirebaseAuth.getInstance()
+    private val db = Firebase.firestore
 
-    private val viewModel: MedicineListViewModel by viewModels{
+    /*private val viewModel: MedicineListViewModel by viewModels{
         object : ViewModelProvider.Factory {
 
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
@@ -40,7 +32,7 @@ class MedicineListFragment : Fragment(R.layout.fragment_medicine_list) {
                 return MedicineListViewModel(repository) as T
             }
         }
-    }
+    }*/
 
     /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,16 +63,57 @@ class MedicineListFragment : Fragment(R.layout.fragment_medicine_list) {
         configureViewListeners()
 
 
+    }
+
+    private fun observerViewModelEvent() {
+        var medicines: MutableList<Medicine> = mutableListOf()
+        medicines.clear()
+        db.collection("medicamentos")
+            .get()
+            .addOnSuccessListener { result ->
+                var cont = 0
+                for (document in result) {
+                    val idMedicine = cont
+                    val nameMedicine = document.get("nameMedicine")
+                    val nameLab = document.get("nameLab")
+                    val activePrinciple = document.get("activePrinciple")
+                    val quantity = document.get("quantity")
+                    var medicine = Medicine(idMedicine.toString(),
+                        nameMedicine.toString(), nameLab.toString(),
+                        activePrinciple.toString(), quantity.toString()
+                    )
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${medicine}")
+
+                    medicines.add(medicine)
+                    cont++
+                }
+
+                Log.d(TAG, "DocumentSnapshot added with ID1: ${medicines}")
+                val adapter  = MedicineListAdapter(medicines)
+                binding.recyclerMedicine.adapter = adapter
+                binding.recyclerMedicine.visibility = View.VISIBLE
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "DocumentSnapshot added with ID: ${exception}")
+            }
+
 
     }
 
+   override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            findNavController().navigateWithAnimations(R.id.action_medicineListFragment_to_loginFormFragment)
+        }
+    }
 
-
-    private fun observerViewModelEvent() {
-        viewModel.allMedicinesEvent.observe(viewLifecycleOwner) { allMedicines ->
+    /*private fun observerViewModelEvent() {
+       viewModel.allMedicinesEvent.observe(viewLifecycleOwner) { allMedicines ->
             val medicineListAdapter = MedicineListAdapter(allMedicines).apply {
                 onItemClick = { medicine ->
-                    val directions = MedicineListFragmentDirections.actionMedicineListFragmentToMedicineFragment(medicine)
+                    val directions = MedicineListFragmentDirections.actionMedicineListFragmentToMedicineFragment()
                     findNavController().navigateWithAnimations(directions)
 
 
@@ -100,11 +133,11 @@ class MedicineListFragment : Fragment(R.layout.fragment_medicine_list) {
 
 
 
-    }
+    }*/
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMedicines()
+       // viewModel.getMedicines()
     }
 
     private fun configureViewListeners()
