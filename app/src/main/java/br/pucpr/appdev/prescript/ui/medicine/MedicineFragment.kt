@@ -24,10 +24,12 @@ import br.pucpr.appdev.prescript.data.db.AppDatabase
 import br.pucpr.appdev.prescript.data.db.dao.MedicineDao
 import br.pucpr.appdev.prescript.databinding.FragmentMedicineBinding
 import br.pucpr.appdev.prescript.extension.hideKeyboard
+import br.pucpr.appdev.prescript.extension.navigateWithAnimations
 import br.pucpr.appdev.prescript.repository.DatabaseDataSource
 import br.pucpr.appdev.prescript.repository.MedicineRepository
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 
 
@@ -35,6 +37,7 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
 
     private var _binding: FragmentMedicineBinding? = null
     private val binding get() = _binding!!
+    private val auth = FirebaseAuth.getInstance()
 
     private val viewModel: MedicineViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -60,6 +63,18 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
 
     }*/
 
+    /**
+     *  Nesta função o sistema verifica se o usuário está logado. Se não estiver, o sistema redireciona para o login.
+     *
+     */
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            findNavController().navigateWithAnimations(R.id.action_medicineListFragment_to_loginFormFragment)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?,
                            savedInstanceState: Bundle?): View {
@@ -133,6 +148,10 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
         }
     }
 
+    /**
+     *  Nesta função o sistema adiciona o medicamento.
+     *
+     */
     private fun setListeners() {
         binding.buttonAddMedicine.setOnClickListener{
             //val imageMedicine = galleryUri.toString()

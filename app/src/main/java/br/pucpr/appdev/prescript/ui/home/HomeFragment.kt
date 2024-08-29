@@ -20,11 +20,7 @@ import br.pucpr.appdev.prescript.ui.medicinelist.MedicineListAdapter
 import com.google.firebase.auth.FirebaseAuth
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -44,15 +40,22 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     *  Aqui o sistema está inflando um ListView com as opções do menu.
+     *
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var itensMenu: MutableList<MenuItem> = mutableListOf()
         val iconMedicine: Drawable? = ResourcesCompat.getDrawable(resources, R.drawable.ic_medicine_black, null)
         val iconExams: Drawable? = ResourcesCompat.getDrawable(resources, R.drawable.ic_exam_black, null)
+        val iconCostumers: Drawable? = ResourcesCompat.getDrawable(resources, R.drawable.ic_costumers, null)
         val itemMenuMedicine =  MenuItem( "Cadastro de Medicamentos", iconMedicine)
         val itemMenuExams =  MenuItem( "Cadastro de Exames", iconExams)
+        val itemMenuCostumers =  MenuItem( "Cadastro de Clientes", iconCostumers)
 
         itensMenu.add(itemMenuMedicine)
         itensMenu.add(itemMenuExams)
+        itensMenu.add(itemMenuCostumers)
 
         val adapter  = MenuAdapter(view.context, itensMenu)
         binding.lista.adapter = adapter
@@ -61,6 +64,10 @@ class HomeFragment : Fragment() {
         configureViewListeners()
     }
 
+    /**
+     *  Nesta função o sitema verifica se o usuário está logado. Se não estiver, o sistema redireciona para o login.
+     *
+     */
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -70,6 +77,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     *  Nesta função o sitema verifica qual item da ListView foi clicado e redireciona para a tela correspondente.
+     *
+     */
     private fun configureViewListeners()
     {
         binding.lista.setOnItemClickListener { parent, view, position, id ->

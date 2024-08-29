@@ -15,11 +15,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFormFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFormFragment : Fragment(R.layout.fragment_login_form) {
 
     private var _binding: FragmentLoginFormBinding? = null
@@ -43,8 +38,13 @@ class LoginFormFragment : Fragment(R.layout.fragment_login_form) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        /**
+         * Nesta função, abaixo, o sistema verifica se os botões "Esqueceu a senha?" e "Cadastrar" foram clicados
+         * e o sistema redireciona para a tela correspondete ao clique
+         **/
         configureViewListeners()
+
+        /** Ao clicar no botão "Login" o sistema chama duas funções. A primeira para esconder o teclado e a segunda para iniciar o login no sistema **/
         binding.btnLogin.setOnClickListener {view ->
             hideKeyboard()
             login(view)
@@ -58,14 +58,20 @@ class LoginFormFragment : Fragment(R.layout.fragment_login_form) {
         val email = binding.emailEditText.text.toString()
         val senha = binding.passwordEditText.text.toString()
 
+        /** O sistema verifica se ao menos um dos campos está vazio. Se estiver uma mensagem é mostrada em tela para que todos os campos sejam preenchidos **/
         if(email.isEmpty() || senha.isEmpty())
         {
             Snackbar.make(view, "Preencha todos os campos vazios!", Snackbar.LENGTH_SHORT).show()
         }
         else
         {
+            /** O sistema se conecta ao Firebase Authentication para iniciar o processo de login **/
             auth.signInWithEmailAndPassword(email,senha).addOnCompleteListener{ login ->
 
+                /**
+                 * Se o e-mail e a senha estiverem corretos o login é efetuado, uma mensagem de texto aparece em tela, os campos são limpos e
+                 * e o sistema redireciona o usuário para a tela de menu
+                 * **/
                 if(login.isSuccessful)
                 {
                     Snackbar.make(view, "Login efetuado com sucesso!", Snackbar.LENGTH_SHORT).show()
@@ -76,6 +82,9 @@ class LoginFormFragment : Fragment(R.layout.fragment_login_form) {
                 }
                 else
                 {
+                    /**
+                     * Se o e-mail e a senha não estiverem corretos o login não é efetuado, uma mensagem de texto aparece em tela e os campos são limpos
+                     * **/
                     Snackbar.make(view, "Não foi possível realizar o login!", Snackbar.LENGTH_SHORT).show()
                     binding.emailEditText.setText("")
                     binding.passwordEditText.setText("")

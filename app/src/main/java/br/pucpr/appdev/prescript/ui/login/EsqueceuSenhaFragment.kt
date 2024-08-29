@@ -38,16 +38,23 @@ class EsqueceuSenhaFragment : Fragment(R.layout.fragment_esqueceu_senha) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configureViewListeners()
+
+        /** Ao clicar no botão "Enviar" o sistema chama duas funções. A primeira para esconder o teclado e a segunda para enviar um e-mail de recuperação de senha **/
         binding.buttonEsqueceuSenha.setOnClickListener {view ->
             hideKeyboard()
             sendEmailResetPassowrd(view)
         }
     }
 
+    /** Função que inicia  recuperação de senha do usuário **/
     private fun sendEmailResetPassowrd(view: View)
     {
+        /** O sistema se conecta ao Firebase Authentication para iniciar o processo de recuperação de senha **/
         auth.sendPasswordResetEmail(binding.inputEmailEsqueceuSenha.text.toString()).addOnCompleteListener {task ->
+            /**
+             * Se o e-mail informado for válido, mesmo que não haja um e-mail cadastrado na base de dados, o sistema mostra uma mensagem de sucesso
+             *  E se o e-mail estiver cadastrado, o sistema enviar uma mensagem com o link para recuperação de da senha
+             **/
             if(task.isSuccessful)
             {
                 binding.inputEmailEsqueceuSenha.setText("")
@@ -55,18 +62,17 @@ class EsqueceuSenhaFragment : Fragment(R.layout.fragment_esqueceu_senha) {
             }
             else
             {
+                /**
+                 * Se o e-mail informado não for válido o sistema mostra uma mensagem de erro
+                 *
+                 **/
                 Snackbar.make(view, "Não foi possível enviar o email de recuperação de senha!", Snackbar.LENGTH_SHORT).show()
             }
 
         }
     }
 
-    private fun configureViewListeners()
-    {
-        /*binding.btnSignUp.setOnClickListener {
-            findNavController().navigateWithAnimations(R.id.action_loginFormFragment_to_userFormFragment)
-        }*/
-    }
+
 
     private fun hideKeyboard()
     {
