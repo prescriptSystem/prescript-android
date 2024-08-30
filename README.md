@@ -63,3 +63,79 @@ Caso o usuário esqueça a senha informada no cadastro, o mesmo poderá modific�
 <p align="left">
   Informando a nova senha o usuário já estará apto para acessar sistema. 
 </p>
+
+### -> Menu
+
+<p align="left">
+  Ao efetuar o login o usuário é redirecionado para a tela de menu do sistema.
+</p>
+
+
+A tela de menu oferece 3 opções de cadastro, mas atualmente só o **Cadastro de Medicamentos** está funcional.
+ 
+
+<img src="https://github.com/user-attachments/assets/e57e11b0-686f-41f0-8f8c-3e495c1229fb" alt="ilustração de um computador" min-width="100px" max-width="100px" width="100px" align="left">
+
+<pre>
+                                  
+
+
+
+  
+
+  
+
+  
+</pre>
+
+### -> Lista de Medicamentos
+
+Clicando na opção de menu **Cadastro de Medicamentos** o usuário é redirecionado para a tela contendo uma lista de medicamentos cadastrados, abaixo.
+
+<img src="https://github.com/user-attachments/assets/9ca11b9f-66f9-449f-a625-1c0784c98cbf" alt="ilustração de um computador" min-width="100px" max-width="100px" width="100px" align="left">
+
+<p align="left">
+  Ao acessar pela primeira vez a lista estará vazia, pois nenhum medicamento foi cadastrado ainda.
+</p>
+
+<p align="left">
+  Para adicionar um novo medicamento basta clicar no botão com o símbolo de :heavy_plus_sign:. E o usuário será redirecionado para a tela de cadastro.
+</p>
+
+<pre>
+                                  
+
+  
+</pre>
+
+### -> Cadastro de Medicamentos
+
+Ao clicar no botão :heavy_plus_sign:, o usuário é redirecionado para a tela de cadastro de medicamentos, abaixo.
+
+<img src="https://github.com/user-attachments/assets/8581a8ee-a0fa-47f7-a857-285c0917ce0f" alt="ilustração de um computador" min-width="100px" max-width="100px" width="100px" align="left">
+
+<p align="left">
+  Na tela de cadastro o usuário precisa informar 4 campos obrigatórios. São eles:
+</p>
+
+<ol>
+  <li>Nome do Medicamento</li>
+  <li>Laboratório</li>
+  <li>Princípio Ativo</li>
+  <li>Quantidade</li>
+</ol>
+
+<p align="left">
+  Preenchendo os campos necessários, basto o usuário clicar no botão salvar para salvar um registro do medicamento.
+</p>
+
+<p align="left">
+  Feito isso, o usuário será redirecionado para a tela de listagem dos medicamentos, onde a lista que anteriormente estava vazia, agora terá um registro do medicamento salvo. Como mostra a tela abaixo.
+</p>
+
+<img src="https://github.com/user-attachments/assets/1c2d89c4-8d52-45db-81d2-3e0efeb350f4" alt="ilustração de um computador" min-width="100px" max-width="100px" width="100px" align="left">
+
+
+
+
+
